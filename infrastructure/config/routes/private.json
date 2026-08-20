@@ -1,0 +1,6 @@
+{
+  "default_nat": {
+    "cidr_block": "0.0.0.0/0",
+    "nat_gateway_id": "${NAT_GW_ID}"
+  }
+}

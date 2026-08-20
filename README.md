@@ -1,24 +1,18 @@
-# simple-api
+<p align="center">
+  <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFqqkJoRRTbvg/company-logo_200_200/B4DZzUkmmOIwAI-/0/1773092891383/kxctecnologia_logo?e=2147483647&v=beta&t=ur-oxF2eamhQF4g4fDQjh6sy1lmH9W7pnOIrNAYOOzg" alt="KXC Tecnologia" width="120" />
+</p>
 
-## Descrição
-Uma API em Node.js utilizando o Express Framework que realiza a conexão com um banco de dados PostgreSQL.
+# Simple-api
 
-## Como utilizar
-O comando para iniciar a API é **npm run start**
+Repositório do Desafio Técnico KXC. Uma API em Node.js que conecta a um PostgreSQL, com a infraestrutura provisionada na AWS via Terraform.
 
-## Rotas
-| Rota | Método | Descrição |
-| --- | --- | --- |
-/ | GET | Retorna uma mensagem estática.
-/connect | GET | Realiza a conexão com o banco e retorna a versão da engine.
+## Estrutura
 
+```
+simple-api/
+├── application/       # Código da aplicação (Node.js + Express)
+└── infrastructure/    # Infraestrutura como código (Terraform)
+```
 
-## Variáveis de Ambiente
-| Nome | Description  | Padrão |
-| --- |  --- |  --- |
-API_PORT | Port da API Node | 3000
-DB_DATABASE | Database do banco de dados | 
-DB_HOST | Endereço do banco de dados | 
-DB_PORT | Port do banco de dados | 5432
-DB_USER | Usuário do banco de dados | 
-DB_PASSWORD | Senha do banco de dados | 
+- **`application/`** — a API e suas dependências. Detalhes de uso e variáveis de ambiente no `application/README.md`.
+- **`infrastructure/`** — módulos e configuração Terraform para provisionar a solução na AWS. Detalhes no `infrastructure/README.md`.
