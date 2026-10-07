@@ -33,6 +33,9 @@ jobs:
           echo "Ref: ${{ github.ref }}"
           echo "Branch: ${{ github.ref_name }}"
           echo "Repository: ${{ github.repository }}"
+          
+      - name: Debug OIDC Claims
+        uses: github/actions-oidc-debugger@main
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6
