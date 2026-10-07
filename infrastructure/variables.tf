@@ -84,11 +84,6 @@ variable "tags_rt_private" {
   default     = {}
 }
 
-variable "container_image" {
-  description = "URI da imagem da aplicação no ECR"
-  type        = string
-}
-
 variable "container_port" {
   description = "Porta em que a aplicação Node escuta"
   type        = number
@@ -122,17 +117,55 @@ variable "extra_environment_variables" {
   default = []
 }
 
-variable "ecs_secrets" {
-  description = "Secrets do ECS referenciadas por ARN ou nome de parâmetro"
-  type = list(object({
-    name      = string
-    valueFrom = string
-  }))
-  default = []
-}
-
 variable "tags_ecs" {
   description = "Tags dos recursos ECS"
+  type        = map(string)
+  default     = {}
+}
+
+variable "container_image_tag" {
+  description = "Tag da imagem Docker publicada no ECR"
+  type        = string
+  default     = "dev"
+}
+
+variable "db_name" {
+  description = "Nome inicial do banco PostgreSQL"
+  type        = string
+}
+
+variable "db_username" {
+  description = "Usuário do banco PostgreSQL"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Senha do banco PostgreSQL"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_engine_version" {
+  description = "Versão do PostgreSQL"
+  type        = string
+  default     = "16"
+}
+
+variable "db_instance_class" {
+  description = "Classe da instância RDS"
+  type        = string
+  default     = "db.t3.micro"
+}
+
+variable "db_allocated_storage" {
+  description = "Armazenamento do RDS em GB"
+  type        = number
+  default     = 20
+}
+
+
+variable "tags_rds" {
+  description = "Tags dos recursos RDS"
   type        = map(string)
   default     = {}
 }

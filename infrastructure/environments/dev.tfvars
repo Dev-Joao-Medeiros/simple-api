@@ -56,3 +56,68 @@ tags_rt_private = {
 # Security Groups, ECS, IAM, Parameter Store, RDS, etc.) seguindo o mesmo
 # padrão de organização acima.
 #==========================================================================
+
+#  O que fiz:
+# As configurações de rede e ECS abaixo são específicas do ambiente.
+# ALB, Target Group, Listener, Security Groups e IAM são compostos
+# na raiz e utilizam valores fixos ou arquivos JSON de configuração.
+
+#==========================================================================
+# ECS / CONTAINER CONFIGURATION
+#==========================================================================
+
+# O Terraform combina esta tag com a URI do repositório ECR criado pela raiz.
+container_image_tag = "dev"
+
+# A porta deve ser a mesma em que a aplicação escuta dentro do container.
+container_port = 3000
+
+# recursos do fargate para desenvolvimento: 0.25 vCPG 512 MiB.
+task_cpu      = 256
+task_memory   = 512
+desired_count = 1
+
+tags_ecs = {
+  Name        = "simple-api-ecs-dev"
+  Environment = "dev"
+  Component   = "compute"
+  ManagedBy   = "terraform"
+}
+
+# Variaveis API_PORT e DB_PORT são adicionadas automaticamente pelo modulo
+extra_environment_variables = [
+  {
+    name  = "NODE_ENV"
+    value = "development"
+  },
+  {
+    name  = "LOG_LEVEL"
+    value = "debug"
+  }
+]
+
+#========================================================================== 
+# DATABASE CONFIGURATION
+#========================================================================== 
+# A senha fica em environments/dev.secrets.tfvars e é injetada pelo SSM.
+
+db_name              = "simple_api"
+db_username          = "app_user"
+db_engine_version    = "16"
+db_instance_class    = "db.t3.micro"
+db_allocated_storage = 20
+
+tags_rds = {
+  Name        = "simple-api-rds-dev"
+  Environment = "dev"
+  Component   = "database"
+  ManagedBy   = "terraform"
+}
+
+#==========================================================================
+# SECURITY GROUPS
+#==========================================================================
+# As regras do ALB e do ECS são carregadas automaticamente de:
+# - config/security_rules/rules-sg-alb.json
+# - config/security_rules/rules-sg-ecs.json
+# O ALB fica nas subnets públicas; as tasks ECS ficam nas subnets privadas.

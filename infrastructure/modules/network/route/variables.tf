@@ -7,3 +7,8 @@ variable "routes_json" {
   description = "JSON com rotas (mapa nome_logico => objeto)."
   type        = string
 }
+
+variable "route_keys" {
+  description = "Chaves estaticas das rotas definidas no JSON."
+  type        = list(string)
+}

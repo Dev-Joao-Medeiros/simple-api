@@ -27,3 +27,23 @@ output "target_group_arn" {
   description = "ARN do target group associado ao ECS"
   value       = module.target_group.target_group_arn
 }
+
+output "ecr_repository_url" {
+  description = "URI do repositório ECR da aplicação"
+  value       = aws_ecr_repository.simple_api.repository_url
+}
+
+output "container_image_uri" {
+  description = "URI completa da imagem usada pelo ECS"
+  value       = "${aws_ecr_repository.simple_api.repository_url}:${var.container_image_tag}"
+}
+
+output "rds_address" {
+  description = "Endpoint DNS do PostgreSQL RDS"
+  value       = module.rds.address
+}
+
+output "rds_endpoint" {
+  description = "Endpoint completo do PostgreSQL RDS"
+  value       = module.rds.endpoint
+}

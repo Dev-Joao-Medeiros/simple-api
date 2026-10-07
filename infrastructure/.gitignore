@@ -15,3 +15,7 @@ terraform.rc
 # Arquivos sensíveis / locais
 *.auto.tfvars
 secrets.tfvars
+
+environments/*.secrets.tfvars
+*.tfstate
+*.tfstate.*
