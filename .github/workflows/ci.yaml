@@ -1,4 +1,3 @@
-# CI da infraestrutura sem mudar nada na aws..
 name: Terraform CI
 
 on: 
